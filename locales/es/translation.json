@@ -1,7 +1,7 @@
 {
   "home": { "title": "LUMINA ART GALLERY", "subtitle": "Descubre la nueva colección de arte contemporáneo.", "shop_now": "Ver Colección" },
-  "nav": { "men": "Paisajes", "women": "Abstracto", "acc": "Fotografía", "search": "Buscar..." },
-  "catalog": { "men": "Paisajes", "women": "Abstracto", "acc": "Fotografía" },
+  "nav": { "landscapes": "Paisajes", "abstract": "Abstracto", "photography": "Fotografía", "search": "Buscar..." },
+  "catalog": { "landscapes": "Paisajes", "abstract": "Abstracto", "photography": "Fotografía" },
   "product": { "new": "Nuevo", "add": "Añadir a la cesta" },
   "cart": { "title": "Tu Cesta", "checkout": "Tramitar Pedido" },
   "checkout": { "title": "Pago Seguro", "card_name": "Nombre en la tarjeta", "card_number": "Número de tarjeta", "pay": "Pagar Ahora", "processing": "Procesando el pago con su banco..." },

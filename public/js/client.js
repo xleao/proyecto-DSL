@@ -13,7 +13,7 @@ function selectSize(btn, size) {
 }
 
 function addToCartPDP(id, name, price, image) {
-    if (!selectedSizePDP) return alert('Por favor, selecciona una talla primero.');
+    if (!selectedSizePDP) return alert('Por favor, selecciona un formato primero.');
     addToCart(id, name, price, image, selectedSizePDP);
 }
 

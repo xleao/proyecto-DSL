@@ -1,7 +1,7 @@
 {
   "home": { "title": "LUMINA ART GALLERY", "subtitle": "Discover the new contemporary art collection.", "shop_now": "View Collection" },
-  "nav": { "men": "Landscapes", "women": "Abstract", "acc": "Photography", "search": "Search..." },
-  "catalog": { "men": "Landscapes", "women": "Abstract", "acc": "Photography" },
+  "nav": { "landscapes": "Landscapes", "abstract": "Abstract", "photography": "Photography", "search": "Search..." },
+  "catalog": { "landscapes": "Landscapes", "abstract": "Abstract", "photography": "Photography" },
   "product": { "new": "New", "add": "Add to cart" },
   "cart": { "title": "Your Cart", "checkout": "Checkout" },
   "checkout": { "title": "Secure Payment", "card_name": "Name on card", "card_number": "Card number", "pay": "Pay Now", "processing": "Processing payment with your bank..." },
