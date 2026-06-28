@@ -1,0 +1,28 @@
+<article class="product-card">
+    <a href="/producto/{{_id}}" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; flex: 1;">
+        <div class="product-image-container">
+            {{#if isNewArrival}}
+                <span class="badge new">{{t 'product.new'}}</span>
+            {{/if}}
+            <img src="{{imageUrl}}" alt="{{translate nameKey}}" class="product-image" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600&auto=format&fit=crop';">
+        </div>
+        
+        <div class="product-info">
+            <h3 class="product-name">{{translate nameKey}}</h3>
+            {{{renderStars rating}}}
+            <p class="product-price">{{formatCurrency price}}</p>
+            
+        </div>
+    </a>
+    
+    <div class="product-actions" style="display: flex; gap: 10px; margin-top: 15px;">
+        <select id="size-{{_id}}" class="size-dropdown" style="padding: 10px; border: 1px solid #ccc; background: white; font-family: inherit; font-size: 1rem; cursor: pointer;">
+            {{#each sizes}}
+                <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+        <button class="btn-add-cart" onclick="addToCartWithDropdown('{{_id}}', '{{translate nameKey}}', {{price}}, '{{imageUrl}}')" style="flex: 1; padding: 10px;">
+            <i class="fa-solid fa-cart-plus"></i> {{t 'product.add'}}
+        </button>
+    </div>
+</article>

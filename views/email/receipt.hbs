@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Recibo de Compra - Oversize Studios</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f9f9f9; padding: 20px; margin: 0; }
+        .container { max-width: 600px; background-color: #ffffff; margin: 0 auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-top: 5px solid #000; }
+        .header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 20px; margin-bottom: 20px; }
+        .header h1 { margin: 0; color: #000; letter-spacing: 2px; }
+        .success-msg { color: #10b981; text-align: center; font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; }
+        .table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .table th { background-color: #f3f4f6; padding: 12px; text-align: left; }
+        .table td { padding: 12px; border-bottom: 1px solid #eee; }
+        .total-row { font-weight: bold; font-size: 1.2rem; background-color: #000; color: #fff; }
+        .total-row td { border: none; }
+        .footer { text-align: center; font-size: 0.8rem; color: #666; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>OVERSIZE <span style="font-weight: 300;">STUDIOS</span></h1>
+        </div>
+        
+        <p class="success-msg">¡Tu pago ha sido procesado con éxito!</p>
+        
+        <p>Hola <strong>Jhostin</strong>,</p>
+        <p>Gracias por tu compra en Oversize Studios. Aquí tienes el detalle de tu pedido virtual (Demostración para la UNI):</p>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Talla</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each cart}}
+                <tr>
+                    <td>{{this.name}}</td>
+                    <td>{{this.size}}</td>
+                    <td>${{this.price}}</td>
+                </tr>
+                {{/each}}
+                <tr class="total-row">
+                    <td colspan="2" style="text-align: right;">Total Pagado:</td>
+                    <td>${{total}}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            <p>Este recibo HTML fue generado dinámicamente con el DSL de Handlebars desde Node.js.</p>
+            <p>&copy; 2026 Oversize Studios.</p>
+        </div>
+    </div>
+</body>
+</html>

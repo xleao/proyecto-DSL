@@ -1,0 +1,31 @@
+<header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>{{t 'home.title'}}</h1>
+        <p>{{t 'home.subtitle'}}</p>
+        <button class="btn-hero" onclick="window.location.href='/categoria/paisajes'">
+            {{t 'home.shop_now'}}
+        </button>
+    </div>
+</header>
+
+<section class="catalog-section">
+    <div class="section-header"><h2>{{t 'catalog.men'}}</h2></div>
+    <div class="product-grid">
+        {{#each paisajesProducts}} {{> productCard }} {{/each}}
+    </div>
+</section>
+
+<section class="catalog-section bg-light">
+    <div class="section-header"><h2>{{t 'catalog.women'}}</h2></div>
+    <div class="product-grid">
+        {{#each abstractoProducts}} {{> productCard }} {{/each}}
+    </div>
+</section>
+
+<section class="catalog-section">
+    <div class="section-header"><h2>{{t 'catalog.acc'}}</h2></div>
+    <div class="product-grid">
+        {{#each fotografiaProducts}} {{> productCard }} {{/each}}
+    </div>
+</section>

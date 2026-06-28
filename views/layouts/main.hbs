@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - LUMINA GALLERY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="/" style="text-decoration:none; color:inherit;">LUMINA <span>GALLERY</span></a></div>
+        
+        <form class="search-form" action="/search" method="GET">
+            <input type="text" name="q" placeholder="{{t 'nav.search'}}" value="{{searchQuery}}" required>
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+
+        <div class="nav-links">
+            <a href="/categoria/paisajes">{{t 'nav.men'}}</a>
+            <a href="/categoria/abstracto">{{t 'nav.women'}}</a>
+            <a href="/categoria/fotografia">{{t 'nav.acc'}}</a>
+        </div>
+        <div class="nav-actions">
+            <div class="lang-switch">
+                <a href="/lang/es" class="{{#if (eq lang 'es')}}active{{/if}}">ES</a>
+                <a href="/lang/en" class="{{#if (eq lang 'en')}}active{{/if}}">EN</a>
+            </div>
+            <button class="cart-btn" onclick="toggleCart()">
+                <i class="fa-solid fa-shopping-bag"></i> <span class="cart-count">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main>{{{body}}}</main>
+    <footer class="footer"><p>&copy; 2026 LUMINA GALLERY. {{t 'footer.rights'}}</p></footer>
+
+    <!-- Carrito Lateral (Sidebar) -->
+    <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>{{t 'cart.title'}}</h2>
+            <button class="close-cart" onclick="closeCart()"><i class="fa-solid fa-times"></i></button>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total"><span>Total:</span> <span id="cart-total-price">$0.00</span></div>
+            <button class="btn-checkout" onclick="openCheckout()">{{t 'cart.checkout'}}</button>
+        </div>
+    </aside>
+
+    <!-- Partial del Modal de Checkout -->
+    {{> checkoutModal }}
+
+    <script src="/js/client.js"></script>
+</body>
+</html>

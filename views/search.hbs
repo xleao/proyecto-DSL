@@ -1,0 +1,20 @@
+<section class="catalog-section">
+    <div class="section-header" style="margin-top: 2rem;">
+        <h2>Resultados para: "{{searchQuery}}"</h2>
+        <p>{{products.length}} producto(s) encontrado(s)</p>
+    </div>
+    
+    {{#if products.length}}
+        <div class="product-grid">
+            {{#each products}}
+                {{> productCard }}
+            {{/each}}
+        </div>
+    {{else}}
+        <div style="text-align:center; padding: 4rem 0;">
+            <i class="fa-solid fa-magnifying-glass" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+            <h3>No se encontraron resultados</h3>
+            <a href="/" style="text-decoration: underline; color: black; display:inline-block; margin-top: 1rem;">Volver a la tienda</a>
+        </div>
+    {{/if}}
+</section>

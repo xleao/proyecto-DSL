@@ -1,0 +1,60 @@
+<div class="checkout-modal" id="checkout-modal">
+    <button class="close-modal" onclick="closeCheckout()"><i class="fa-solid fa-times"></i></button>
+    
+    <div class="payment-header">
+        <h2 id="checkout-title"><i class="fa-solid fa-shield-halved" style="color: #10b981;"></i> {{t 'checkout.title'}}</h2>
+        <div class="card-icons">
+            <i class="fa-brands fa-cc-visa" style="color: #1434CB;"></i>
+            <i class="fa-brands fa-cc-mastercard" style="color: #EB001B;"></i>
+            <i class="fa-brands fa-cc-amex" style="color: #2e77bb;"></i>
+            <i class="fa-brands fa-cc-paypal" style="color: #003087;"></i>
+        </div>
+    </div>
+
+    <form id="payment-form" onsubmit="processPayment(event)" class="premium-form">
+        <div class="form-group">
+            <label>{{t 'checkout.card_name'}}</label>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-user input-icon"></i>
+                <input type="text" value="Leonardo UNI" required>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>{{t 'checkout.card_number'}}</label>
+            <div class="input-wrapper">
+                <i class="fa-regular fa-credit-card input-icon"></i>
+                <input type="text" pattern="[\d\s]{19}" title="16 dígitos numéricos" value="4555 1234 1234 1234" required>
+                <i class="fa-brands fa-cc-visa cc-brand-icon"></i>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label>Expira (MM/YY)</label>
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-calendar input-icon"></i>
+                    <input type="text" value="12/28" required style="width: 100%;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>CVC / CVV</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="password" value="777" required style="width: 100%;">
+                </div>
+            </div>
+        </div>
+
+        <div class="secure-badge">
+            <i class="fa-solid fa-lock"></i> Encriptación SSL de 256 bits.
+        </div>
+
+        <button type="submit" class="btn-pay">{{t 'checkout.pay'}}</button>
+    </form>
+    
+    <div class="spinner">
+        <i class="fa-solid fa-circle-notch"></i>
+        <p>{{t 'checkout.processing'}}</p>
+    </div>
+</div>

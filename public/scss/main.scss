@@ -1,0 +1,236 @@
+// Variables
+$bg-primary: #ffffff;
+$bg-secondary: #f9fafb;
+$text-dark: #111827;
+$text-light: #6b7280;
+$accent-color: #000000;
+$border-color: #e5e7eb;
+$transition: 0.3s ease;
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Montserrat', sans-serif; background: $bg-primary; color: $text-dark; overflow-x: hidden; }
+
+/* Navbar */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center; padding: 1rem 5%;
+    background: white; border-bottom: 1px solid $border-color; position: sticky; top: 0; z-index: 50;
+    
+    .logo { font-size: 1.5rem; font-weight: 900; }
+    .nav-links {
+        display: flex; gap: 2rem;
+        a { font-weight: 600; font-size: 0.9rem; text-decoration: none; color: $text-dark; text-transform: uppercase; }
+    }
+    .nav-actions {
+        display: flex; gap: 1rem; align-items: center;
+        .lang-switch a { text-decoration: none; color: $text-light; font-weight: 700; font-size: 0.8rem; margin-left: 5px; &.active { color: black; } }
+        .cart-btn {
+            background: none; border: none; font-size: 1.2rem; cursor: pointer; position: relative;
+            .cart-count { position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; font-size: 0.7rem; padding: 2px 5px; font-weight: bold; }
+        }
+    }
+}
+
+/* Hero */
+.hero {
+    height: 70vh; background: url('https://loremflickr.com/1920/1080/museum,art,gallery?lock=1001') center/cover;
+    display: flex; align-items: center; justify-content: center; position: relative;
+    .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+    .hero-content { position: relative; z-index: 10; text-align: center; color: white; h1 { font-size: 4rem; font-weight: 900; text-transform: uppercase; } .btn-hero { margin-top: 1.5rem; padding: 1rem 2rem; background: white; color: black; border: none; font-weight: bold; cursor: pointer; } }
+}
+
+/* Grid y Tarjetas - FIXED LAYOUT */
+.catalog-section { padding: 4rem 5%; &.bg-light { background: $bg-secondary; } h2 { text-align: center; font-size: 2.5rem; text-transform: uppercase; margin-bottom: 3rem; } }
+.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
+
+.product-card {
+    background: white; border: 1px solid $border-color; display: flex; flex-direction: column; transition: transform $transition;
+    &:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+    
+    .product-image-container {
+        width: 100%; height: 350px; position: relative; overflow: hidden; background: #f3f4f6;
+        .badge { position: absolute; top: 10px; left: 10px; background: black; color: white; padding: 5px 10px; font-size: 0.7rem; font-weight: 700; z-index: 2; }
+        .product-image { width: 100%; height: 100%; object-fit: cover; }
+    }
+    
+    .product-info {
+        padding: 1.5rem; display: flex; flex-direction: column; flex: 1; text-align: center;
+        .product-name { font-size: 1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .product-price { color: $text-light; font-weight: 600; margin-bottom: 1rem; }
+        .product-sizes { display: flex; justify-content: center; gap: 5px; margin-bottom: 1.5rem; .size-tag { border: 1px solid #ddd; padding: 3px 6px; font-size: 0.75rem; color: $text-light; } }
+        .btn-add-cart { margin-top: auto; width: 100%; padding: 0.8rem; background: black; color: white; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; &:hover { background: #333; } }
+    }
+}
+
+/* Sidebar Carrito */
+.cart-sidebar {
+    position: fixed; top: 0; right: -400px; width: 400px; max-width: 100%; height: 100vh; background: white; z-index: 1000; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.4s ease; display: flex; flex-direction: column;
+    &.open { right: 0; }
+    
+    .cart-header { padding: 1.5rem; border-bottom: 1px solid $border-color; display: flex; justify-content: space-between; align-items: center; h2 { font-size: 1.5rem; } .close-cart { background: none; border: none; font-size: 1.5rem; cursor: pointer; } }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1.5rem; }
+    
+    .cart-item {
+        display: flex; gap: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;
+        img { width: 70px; height: 90px; object-fit: cover; }
+        .item-details { flex: 1; h4 { font-size: 0.9rem; } p { color: $text-light; margin-top: 5px; } }
+        .remove-item { background: none; border: none; color: red; cursor: pointer; font-size: 0.8rem; margin-top: 10px; text-decoration: underline; }
+    }
+    
+    .cart-footer { padding: 1.5rem; border-top: 1px solid $border-color; .cart-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem; } .btn-checkout { width: 100%; padding: 1rem; background: #16a34a; color: white; font-weight: 700; border: none; cursor: pointer; } }
+}
+.cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; display: none; &.open { display: block; } }
+
+/* Modal Checkout Premium */
+.checkout-modal {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); opacity: 0; pointer-events: none; 
+    background: white; padding: 2.5rem; border-radius: 16px; z-index: 2000; width: 90%; max-width: 450px; 
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    &.open { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto; }
+    
+    .payment-header { text-align: center; margin-bottom: 2rem; }
+    h2 { font-size: 1.5rem; color: #111827; margin-bottom: 0.5rem; }
+    .card-icons { display: flex; justify-content: center; gap: 10px; font-size: 2rem; margin-top: 10px; }
+    
+    .premium-form {
+        .form-group { margin-bottom: 1.2rem; text-align: left; }
+        label { display: block; font-size: 0.85rem; font-weight: 700; color: #374151; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .form-row { display: flex; gap: 1rem; .form-group { flex: 1; } }
+        
+        .input-wrapper { 
+            position: relative; display: flex; align-items: center; 
+            .input-icon { position: absolute; left: 12px; color: #9ca3af; font-size: 1.1rem; }
+            .cc-brand-icon { position: absolute; right: 12px; color: #1434CB; font-size: 1.5rem; }
+            input { 
+                width: 100%; padding: 0.9rem 1rem 0.9rem 2.5rem; border: 1px solid #d1d5db; border-radius: 8px; 
+                font-size: 1rem; color: #111827; transition: border-color 0.2s, box-shadow 0.2s; font-family: inherit; margin:0;
+                &:focus { outline: none; border-color: #000; box-shadow: 0 0 0 3px rgba(0,0,0,0.1); }
+            }
+        }
+        
+        .secure-badge { text-align: center; font-size: 0.8rem; color: #10b981; margin: 1rem 0; font-weight: 600; i { margin-right: 5px; } }
+        
+        .btn-pay { width: 100%; padding: 1.2rem; background: #000; color: white; font-size: 1.1rem; font-weight: 900; text-transform: uppercase; border: none; cursor: pointer; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    }
+    
+    .close-modal { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 1.5rem; color: #6b7280; cursor: pointer; transition: color 0.2s; &:hover { color: #000; } }
+    
+    .spinner { display: none; text-align: center; margin-top: 1rem; color: #111827; i { font-size: 2.5rem; animation: spin 1s linear infinite; margin-bottom: 10px; } p { font-weight: 600; } }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+}
+
+.footer { background: black; color: white; text-align: center; padding: 2rem; }
+
+/* Search form */
+.search-form {
+    display: flex; align-items: center; background: #f3f4f6; border-radius: 20px; padding: 5px 15px; margin: 0 2rem; flex: 1; max-width: 400px;
+    input { background: none; border: none; outline: none; flex: 1; padding: 5px; font-family: inherit; }
+    button { background: none; border: none; cursor: pointer; color: $text-light; }
+}
+
+/* Stars */
+.product-stars { display: flex; align-items: center; justify-content: center; gap: 2px; margin-bottom: 0.5rem; font-size: 0.8rem; .rating-number { margin-left: 5px; color: $text-light; } }
+
+/* PDP (Product Detail Page) */
+.pdp-container {
+    display: flex; max-width: 1200px; margin: 4rem auto; gap: 4rem; padding: 0 5%;
+    
+    .pdp-image {
+        flex: 1; position: relative;
+        img { width: 100%; height: auto; object-fit: cover; }
+        .badge { position: absolute; top: 15px; left: 15px; background: black; color: white; padding: 8px 15px; font-weight: bold; }
+    }
+    
+    .pdp-details {
+        flex: 1; display: flex; flex-direction: column; justify-content: center;
+        .pdp-title { font-size: 2.5rem; text-transform: uppercase; margin-bottom: 1rem; }
+        .pdp-rating { justify-content: flex-start; margin-bottom: 1.5rem; font-size: 1.2rem; }
+        .pdp-price { font-size: 2rem; font-weight: bold; margin-bottom: 2rem; }
+        .pdp-desc { color: $text-light; line-height: 1.6; margin-bottom: 2rem; font-size: 1.1rem; }
+        
+        .pdp-sizes {
+            margin-bottom: 2rem;
+            h4 { margin-bottom: 1rem; }
+            .size-options { display: flex; gap: 10px; }
+            .size-btn { border: 1px solid #ccc; background: white; padding: 10px 20px; cursor: pointer; transition: 0.2s; &:hover { border-color: black; background: #f9f9f9; } }
+        }
+        
+        .btn-pdp-add { background: black; color: white; padding: 1.2rem; border: none; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; &:hover { background: #333; } }
+    }
+}
+@media (max-width: 768px) {
+    .pdp-container { flex-direction: column; gap: 2rem; }
+    .search-form { display: none; }
+}
+
+
+.payment-success-ui {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 0;
+    
+    .success-icon {
+        font-size: 5rem;
+        color: #10b981;
+        margin-bottom: 1rem;
+        animation: scaleIn 0.5s ease-out;
+    }
+    
+    h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+    p { color: $text-light; }
+}
+
+@keyframes scaleIn {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.spinner i { animation: spin 1s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Animaciones Globales y Amigables */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseBadge {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Animación del Hero */
+.hero-content h1, .hero-content p, .hero-content button {
+    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+.hero-content h1 { animation-delay: 0.1s; }
+.hero-content p { animation-delay: 0.3s; }
+.hero-content button { animation-delay: 0.5s; }
+
+/* Efecto Cascada en las tarjetas */
+.product-card {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+@for $i from 1 through 15 {
+    .product-card:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.08}s;
+    }
+}
+
+/* Badge palpitante */
+.badge.new {
+    animation: pulseBadge 2s infinite;
+}
+
+/* Efecto "Push" (aplastar) para todos los botones interactivos */
+button, .btn-add-cart, .btn-pdp-add, .size-btn {
+    transition: transform 0.1s ease, background 0.3s ease, border-color 0.3s ease;
+}
+button:active, .btn-add-cart:active, .btn-pdp-add:active, .size-btn:active, .product-card:active {
+    transform: scale(0.96) !important;
+}

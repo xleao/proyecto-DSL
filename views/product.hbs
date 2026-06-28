@@ -1,0 +1,31 @@
+<section class="pdp-container">
+    <div class="pdp-image">
+        {{#if product.isNewArrival}}
+            <span class="badge new">{{t 'product.new'}}</span>
+        {{/if}}
+        <img src="{{product.imageUrl}}" alt="{{translate product.nameKey}}" onerror="this.onerror=null;this.src='https://loremflickr.com/600/800/art?lock=999';">
+    </div>
+    
+    <div class="pdp-details">
+        <h1 class="pdp-title">{{translate product.nameKey}}</h1>
+        <div class="pdp-rating">
+            {{{renderStars product.rating}}}
+        </div>
+        <p class="pdp-price">{{formatCurrency product.price}}</p>
+        
+        <p class="pdp-desc">{{translate product.descriptionKey}}</p>
+        
+        <div class="pdp-sizes">
+            <h4>Tamaños Disponibles:</h4>
+            <div class="size-options">
+                {{#each product.sizes}}
+                    <button class="size-btn" onclick="selectSize(this, '{{this}}')">{{this}}</button>
+                {{/each}}
+            </div>
+        </div>
+        
+        <button class="btn-pdp-add" onclick="addToCartPDP('{{product._id}}', '{{translate product.nameKey}}', {{product.price}}, '{{product.imageUrl}}')">
+            <i class="fa-solid fa-cart-plus"></i> {{t 'product.add'}}
+        </button>
+    </div>
+</section>
