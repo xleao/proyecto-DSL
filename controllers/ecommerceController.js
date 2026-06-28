@@ -116,9 +116,9 @@ exports.getCategoryPage = async (req, res) => {
         const filtered = products.filter(p => p.category === cat);
         
         let catTitle = cat.toUpperCase();
-        if(cat === 'paisajes') catTitle = req.t('nav.men');
-        if(cat === 'abstracto') catTitle = req.t('nav.women');
-        if(cat === 'fotografia') catTitle = req.t('nav.acc');
+        if(cat === 'paisajes') catTitle = req.t('nav.landscapes');
+        if(cat === 'abstracto') catTitle = req.t('nav.abstract');
+        if(cat === 'fotografia') catTitle = req.t('nav.photography');
         
         res.render('category', {
             title: catTitle,
