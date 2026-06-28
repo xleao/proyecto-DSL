@@ -181,7 +181,7 @@ En lugar de escribir CSS plano, hemos utilizado Sass (Syntactically Awesome Styl
 *   **Anidamiento Lógico:** Reproduciendo la estructura jerárquica del árbol DOM directamente en el código de estilos, evitando repeticiones exhaustivas de selectores pesados.
 
 ### 5.2. Arquitectura de Pasarela y Redirecciones
-La aplicación web utiliza un flujo asíncrono para su pasarela de pagos. Al presionar "Comprar", un Modal sobre-impreso captura la información de tarjeta de crédito (con validaciones matemáticas de longitud y requerimientos numéricos). Un *loader spinner* dinámico comunica latencia al usuario mientras una petición POST llega a `processCheckout` en el controlador. Este, tras validar, invoca la API SMTP de **NodeMailer**, construyendo en tiempo real y disparando al usuario un comprobante formal de la transacción en su correo electrónico personal (jhostin.rodriguez.n@uni.pe).
+La aplicación web utiliza un flujo asíncrono para su pasarela de pagos. Al presionar "Comprar", un Modal sobre-impreso captura la información de tarjeta de crédito (con validaciones matemáticas de longitud y requerimientos numéricos). Un *loader spinner* dinámico comunica latencia al usuario mientras una petición POST llega a `processCheckout` en el controlador. Este, tras validar, ejecuta un retraso asíncrono intencional (`setTimeout`) para emular la latencia de red contra una pasarela internacional bancaria real (como Stripe o Visa). Una vez superado el tiempo de red, inyecta feedback visual instantáneo de aprobación.
 
 ---
 

@@ -1,6 +1,5 @@
 const Product = require('../models/Product');
 const mongoose = require('mongoose');
-const nodemailer = require('nodemailer');
 
 const fallbackProducts = [
     // Paisajes
@@ -146,42 +145,11 @@ exports.processCheckout = async (req, res) => {
         const cart = req.body.cart || [];
         if (cart.length === 0) return res.status(400).json({ error: "Carrito vacío" });
         
-        const total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
-        
-        // Renderizar la plantilla DSL a HTML usando el motor configurado en Express
-        req.app.render('email/receipt', { cart, total, layout: false }, async (err, html) => {
-            if (err) {
-                console.error("Error compilando email:", err);
-                return res.status(500).json({ error: "Error interno renderizando" });
-            }
-            
-            // Configurar Nodemailer
-            let transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: process.env.EMAIL_USER,
-                    pass: process.env.EMAIL_PASS
-                }
-            });
-            
-            try {
-                if(process.env.EMAIL_USER && process.env.EMAIL_PASS) {
-                    await transporter.sendMail({
-                        from: '"Lumina Art Gallery" <' + process.env.EMAIL_USER + '>',
-                        to: 'jhostin.rodriguez.n@uni.pe',
-                        subject: 'Recibo de tu compra - Lumina Art Gallery',
-                        html: html
-                    });
-                    console.log("✅ Correo enviado con éxito a jhostin.rodriguez.n@uni.pe");
-                } else {
-                    console.warn("⚠️ No se pudo enviar el correo: Faltan credenciales EMAIL_USER y EMAIL_PASS en el archivo .env");
-                }
-            } catch (mailErr) {
-                console.error("❌ Error enviando correo:", mailErr.message);
-            }
-            
+        // Simulamos un retraso de red para que se vea el spinner de "Procesando pago..."
+        setTimeout(() => {
             res.json({ success: true });
-        });
+        }, 1500);
+        
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Error en checkout" });
