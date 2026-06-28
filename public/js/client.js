@@ -47,23 +47,17 @@ function updateCartUI() {
     const cartItems = document.querySelector('.cart-items');
     if(!cartItems) return;
     
-    cartItems.innerHTML = '';
-    let total = 0;
+    // Isomorphic Handlebars rendering
+    const source = document.getElementById('cart-item-template').innerHTML;
+    const template = Handlebars.compile(source);
     
-    cart.forEach((item, index) => {
+    let total = 0;
+    const context = cart.map((item) => {
         total += item.price;
-        cartItems.innerHTML += `
-            <div class="cart-item">
-                <img src="${item.image}" alt="">
-                <div class="item-details">
-                    <h4>${item.name}</h4>
-                    <p style="font-size: 0.9rem; color: #6b7280;">Talla: ${item.size}</p>
-                    <p>$${item.price.toFixed(2)}</p>
-                    <button class="remove-item" onclick="removeFromCart(${index})">Eliminar</button>
-                </div>
-            </div>
-        `;
+        return { ...item, price: item.price.toFixed(2) };
     });
+    
+    cartItems.innerHTML = template(context);
     
     const totalEl = document.getElementById('cart-total-price');
     if(totalEl) totalEl.innerText = '$' + total.toFixed(2);
