@@ -12,23 +12,34 @@
     <nav class="navbar">
         <div class="logo"><a href="/" style="text-decoration:none; color:inherit;">LUMINA <span>GALLERY</span></a></div>
         
-        <form class="search-form" action="/search" method="GET">
-            <input type="text" name="q" placeholder="{{t 'nav.search'}}" value="{{searchQuery}}" required>
-            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
+        <div class="nav-menu" id="nav-menu">
+            <form class="search-form" action="/search" method="GET">
+                <input type="text" name="q" placeholder="{{t 'nav.search'}}" value="{{searchQuery}}" required>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
 
-        <div class="nav-links">
-            <a href="/categoria/paisajes">{{t 'nav.landscapes'}}</a>
-            <a href="/categoria/abstracto">{{t 'nav.abstract'}}</a>
-            <a href="/categoria/fotografia">{{t 'nav.photography'}}</a>
+            <div class="nav-links">
+                <a href="/categoria/paisajes">{{t 'nav.landscapes'}}</a>
+                <a href="/categoria/abstracto">{{t 'nav.abstract'}}</a>
+                <a href="/categoria/fotografia">{{t 'nav.photography'}}</a>
+            </div>
+
+            <div class="mobile-lang-switch">
+                <a href="/lang/es" class="{{#if (eq lang 'es')}}active{{/if}}">ES</a>
+                <a href="/lang/en" class="{{#if (eq lang 'en')}}active{{/if}}">EN</a>
+            </div>
         </div>
+
         <div class="nav-actions">
-            <div class="lang-switch">
+            <div class="lang-switch-desktop">
                 <a href="/lang/es" class="{{#if (eq lang 'es')}}active{{/if}}">ES</a>
                 <a href="/lang/en" class="{{#if (eq lang 'en')}}active{{/if}}">EN</a>
             </div>
             <button class="cart-btn" onclick="toggleCart()">
                 <i class="fa-solid fa-shopping-bag"></i> <span class="cart-count">0</span>
+            </button>
+            <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars"></i>
             </button>
         </div>
     </nav>
@@ -57,11 +68,11 @@
     <script id="cart-item-template" type="text/x-handlebars-template">
         \{{#each this}}
         <div class="cart-item">
-            <img src="\{{image}}" alt="">
+            <img src="\{{image}}" alt="\{{name}}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=600&auto=format&fit=crop';">
             <div class="item-details">
                 <h4>\{{name}}</h4>
                 <p style="font-size: 0.9rem; color: #6b7280;">Formato: \{{size}}</p>
-                <p>$\{{price}}</p>
+                <p>Cant: \{{quantity}} × $\{{price}}</p>
                 <button class="remove-item" onclick="removeFromCart(\{{@index}})">Eliminar</button>
             </div>
         </div>

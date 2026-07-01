@@ -16,16 +16,45 @@ body { font-family: 'Montserrat', sans-serif; background: $bg-primary; color: $t
     background: white; border-bottom: 1px solid $border-color; position: sticky; top: 0; z-index: 50;
     
     .logo { font-size: 1.5rem; font-weight: 900; }
-    .nav-links {
-        display: flex; gap: 2rem;
-        a { font-weight: 600; font-size: 0.9rem; text-decoration: none; color: $text-dark; text-transform: uppercase; }
+    
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        justify-content: space-between;
+        margin: 0 2rem;
+        
+        .nav-links {
+            display: flex; gap: 2rem;
+            a { font-weight: 600; font-size: 0.9rem; text-decoration: none; color: $text-dark; text-transform: uppercase; }
+        }
+        
+        .mobile-lang-switch {
+            display: none;
+        }
     }
+    
     .nav-actions {
-        display: flex; gap: 1rem; align-items: center;
-        .lang-switch a { text-decoration: none; color: $text-light; font-weight: 700; font-size: 0.8rem; margin-left: 5px; &.active { color: black; } }
+        display: flex; gap: 1.5rem; align-items: center;
+        
+        .lang-switch-desktop {
+            display: flex;
+            gap: 5px;
+            a { text-decoration: none; color: $text-light; font-weight: 700; font-size: 0.8rem; margin-left: 5px; &.active { color: black; } }
+        }
+        
         .cart-btn {
             background: none; border: none; font-size: 1.2rem; cursor: pointer; position: relative;
             .cart-count { position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; font-size: 0.7rem; padding: 2px 5px; font-weight: bold; }
+        }
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: $text-dark;
+            padding: 5px;
         }
     }
 }
@@ -58,6 +87,34 @@ body { font-family: 'Montserrat', sans-serif; background: $bg-primary; color: $t
         .product-price { color: $text-light; font-weight: 600; margin-bottom: 1rem; }
         .product-sizes { display: flex; justify-content: center; gap: 5px; margin-bottom: 1.5rem; .size-tag { border: 1px solid #ddd; padding: 3px 6px; font-size: 0.75rem; color: $text-light; } }
         .btn-add-cart { margin-top: auto; width: 100%; padding: 0.8rem; background: black; color: white; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; &:hover { background: #333; } }
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+        padding: 0 1.5rem 1.5rem;
+        
+        .size-dropdown {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: white;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        .btn-add-cart {
+            flex: 1;
+            padding: 10px;
+            background: black;
+            color: white;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            &:hover { background: #333; }
+        }
     }
 }
 
@@ -158,8 +215,145 @@ body { font-family: 'Montserrat', sans-serif; background: $bg-primary; color: $t
     }
 }
 @media (max-width: 768px) {
-    .pdp-container { flex-direction: column; gap: 2rem; }
-    .search-form { display: none; }
+    .navbar {
+        padding: 0.8rem 5%;
+        .logo { font-size: 1.2rem; }
+        .nav-actions {
+            .menu-toggle {
+                display: block;
+            }
+            .lang-switch-desktop {
+                display: none;
+            }
+        }
+        .nav-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid $border-color;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transform: translateY(-150%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            gap: 1.5rem;
+            z-index: 49;
+            &.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .search-form {
+                width: 100%;
+                margin: 0;
+                display: flex;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                align-items: center;
+                display: flex;
+                a { font-size: 1rem; padding: 0.5rem 0; width: 100%; text-align: center; }
+            }
+            .mobile-lang-switch {
+                display: flex;
+                gap: 15px;
+                margin-top: 0.5rem;
+                a { text-decoration: none; color: $text-light; font-weight: 700; font-size: 0.9rem; &.active { color: black; } }
+            }
+        }
+    }
+
+    .hero {
+        height: 50vh;
+        .hero-content {
+            padding: 0 1rem;
+            h1 { font-size: 2.2rem; line-height: 1.2; }
+            .btn-hero { margin-top: 1rem; padding: 0.8rem 1.5rem; }
+        }
+    }
+    
+    .catalog-section {
+        padding: 2.5rem 3%;
+        h2 { font-size: 1.8rem; margin-bottom: 2rem; }
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .product-card {
+        .product-image-container {
+            height: 200px;
+        }
+        .product-info {
+            padding: 1rem;
+            .product-name { font-size: 0.9rem; margin-bottom: 0.3rem; }
+            .product-price { font-size: 0.85rem; margin-bottom: 0.5rem; }
+            .product-stars { font-size: 0.7rem; margin-bottom: 0.3rem; }
+        }
+        .product-actions {
+            flex-direction: column;
+            gap: 8px;
+            padding: 0 10px 10px;
+            margin-top: 5px;
+            .size-dropdown {
+                width: 100% !important;
+                padding: 6px !important;
+                font-size: 0.85rem !important;
+                height: 35px;
+            }
+            .btn-add-cart {
+                width: 100% !important;
+                padding: 6px !important;
+                font-size: 0.85rem !important;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+    
+    .cart-sidebar {
+        width: 100%;
+    }
+    
+    .checkout-modal {
+        padding: 1.5rem;
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .pdp-container {
+        flex-direction: column;
+        gap: 2rem;
+        margin: 2rem auto;
+        
+        .pdp-image {
+            height: 300px;
+            img { height: 100%; width: 100%; object-fit: cover; }
+        }
+        
+        .pdp-details {
+            .pdp-title { font-size: 1.8rem; }
+            .pdp-price { font-size: 1.5rem; margin-bottom: 1rem; }
+            .pdp-desc { font-size: 0.95rem; margin-bottom: 1.5rem; }
+            .pdp-sizes {
+                margin-bottom: 1.5rem;
+                .size-options { flex-wrap: wrap; }
+                .size-btn { padding: 8px 15px; font-size: 0.9rem; }
+            }
+        }
+    }
 }
 
 
@@ -179,6 +373,25 @@ body { font-family: 'Montserrat', sans-serif; background: $bg-primary; color: $t
     
     h2 { font-size: 2rem; margin-bottom: 0.5rem; }
     p { color: $text-light; }
+    
+    .btn-continue-shopping {
+        display: inline-block;
+        padding: 0.9rem 2rem;
+        background: #38bdf8;
+        color: white;
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.1s;
+        box-shadow: 0 4px 6px -1px rgba(56, 189, 248, 0.2), 0 2px 4px -1px rgba(56, 189, 248, 0.1);
+        
+        &:hover {
+            background: #0ea5e9;
+        }
+    }
 }
 
 @keyframes scaleIn {

@@ -7,7 +7,8 @@ const ProductSchema = new mongoose.Schema({
     category: { type: String, enum: ['paisajes', 'abstracto', 'fotografia'], required: true },
     sizes: [{ type: String }],
     imageUrl: { type: String, required: true },
-    isNewArrival: { type: Boolean, default: false }
+    isNewArrival: { type: Boolean, default: false },
+    rating: { type: Number, default: 0 }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', ProductSchema);
